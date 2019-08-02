@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">workin</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_out">Sign out</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="placeholder">placeholder</string>
+</resources>
