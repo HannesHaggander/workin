@@ -7,18 +7,12 @@ import java.util.*
 
 @Entity(tableName = "work-sessions")
 data class WorkSession(
-    @PrimaryKey @ColumnInfo(name = "_id") val id: UUID,
-    val description: String,
+    @PrimaryKey @ColumnInfo(name = "_id") val id: UUID = UUID.randomUUID(),
+    val description: String = "",
     var createdAt : Calendar = Calendar.getInstance(),
     var closedAt : Calendar? = null
 ){
     override fun toString(): String {
         return "$id:$description"
     }
-}
-
-sealed class WorkSessionEvent {
-    class Inserted(val data : WorkSession) : WorkSessionEvent()
-    class Removed(val data : WorkSession) : WorkSessionEvent()
-    class Updated(val data : WorkSession) : WorkSessionEvent()
 }

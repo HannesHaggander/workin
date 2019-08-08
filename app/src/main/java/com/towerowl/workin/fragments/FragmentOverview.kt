@@ -10,27 +10,23 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.towerowl.workin.App
 import com.towerowl.workin.R
 import com.towerowl.workin.data.WorkSession
-import com.towerowl.workin.data.WorkSessionEvent
 import com.towerowl.workin.data.WorkSessionRepository
-import com.towerowl.workin.utils.Injector
+import com.towerowl.workin.events.WorkSessionEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 import java.util.*
 
 class FragmentOverview : Fragment() {
-    private val mStartButton : AppCompatButton
-            by lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_sign_in) ?: throw Exception() }
 
-    private val mStopButton : AppCompatButton
-            by lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_sign_out) ?: throw Exception() }
+    private val mStartButton: AppCompatButton by lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_sign_in) ?: throw Exception() }
+    private val mStopButton: AppCompatButton by lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_sign_out) ?: throw Exception() }
+    private val mSessionList: RecyclerView by lazy { view?.findViewById<RecyclerView>(R.id.f_overview_activity_recycler) ?: throw Exception() }
 
-    private val mSessionList : RecyclerView
-            by lazy { view?.findViewById<RecyclerView>(R.id.f_overview_activity_recycler) ?: throw Exception() }
-
-    private val mAdapter : SessionAdapter = SessionAdapter()
+    private val mAdapter: SessionAdapter = SessionAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_overview, container, false)
@@ -42,11 +38,11 @@ class FragmentOverview : Fragment() {
         setupRecycler()
     }
 
-    private fun getWorkSessionRepo() : WorkSessionRepository{
-        return Injector.injectWorkSessionRepository(requireContext())
-    }
+    private fun getWorkSessionRepo(): WorkSessionRepository =
+        App.get(requireActivity())
+            .workSessionRepo
 
-    private fun setupButtons(){
+    private fun setupButtons() {
         mStartButton.setOnClickListener {
             val session = WorkSession(UUID.randomUUID(), "Injected ${Random().nextInt(1000)}")
 
@@ -58,7 +54,8 @@ class FragmentOverview : Fragment() {
             getWorkSessionRepo().closeOpenWorkSession()
         }
 
-        Injector.injectWorkSessionRepository(requireContext())
+        App.get(requireActivity())
+            .workSessionRepo
             .messageFlow
             .doOnNext {
                 when (it) {
@@ -72,30 +69,34 @@ class FragmentOverview : Fragment() {
             .subscribe()
     }
 
-    private fun setupRecycler(){
+    private fun setupRecycler() {
         mSessionList.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         mSessionList.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         mSessionList.adapter = mAdapter
     }
 
     internal class SessionAdapter : RecyclerView.Adapter<SessionViewHolder>() {
-        private val data : MutableList<WorkSession> = mutableListOf()
+        private val data: MutableList<WorkSession> = mutableListOf()
         private val vhMap = mutableMapOf<WorkSession, SessionViewHolder>()
 
-        fun add(item : WorkSession){
-            if(data.any { it.id == item.id}) { return }
+        fun add(item: WorkSession) {
+            if (data.any { it.id == item.id }) {
+                return
+            }
             data.add(item)
-            notifyItemInserted(itemCount-1)
+            notifyItemInserted(itemCount - 1)
         }
 
-        fun remove(item : WorkSession){
+        fun remove(item: WorkSession) {
             val pos = data.indexOf(item)
-            if(pos < 0) { return }
+            if (pos < 0) {
+                return
+            }
             data.removeAt(pos)
             notifyItemRemoved(pos)
         }
 
-        fun update(item : WorkSession){
+        fun update(item: WorkSession) {
             data.asSequence().find { it.id == item.id }?.let {
                 vhMap[it]?.setData(item)
                 val pos = data.indexOf(it)
@@ -104,14 +105,16 @@ class FragmentOverview : Fragment() {
             }
         }
 
-        fun clear(){
+        fun clear() {
             data.clear()
             notifyDataSetChanged()
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SessionViewHolder {
-            return SessionViewHolder(LayoutInflater.from(parent.context)
-                .inflate(R.layout.vh_session_data, parent, false))
+            return SessionViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.vh_session_data, parent, false)
+            )
         }
 
         override fun getItemCount(): Int {
@@ -125,14 +128,14 @@ class FragmentOverview : Fragment() {
 
     }
 
-    internal class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        fun setData(data : WorkSession){
+    internal class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun setData(data: WorkSession) {
             val dformat = SimpleDateFormat("hh:mm", Locale.getDefault())
 
             itemView.findViewById<AppCompatTextView>(R.id.vh_session_start).text =
                 "Start: ${dformat.format(data.createdAt.time)}"
             itemView.findViewById<AppCompatTextView>(R.id.vh_session_end).text =
-                "End: ${data.closedAt?.let { dformat.format(it.time)} ?: ""}"
+                "End: ${data.closedAt?.let { dformat.format(it.time) } ?: ""}"
         }
     }
 }

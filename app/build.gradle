@@ -46,11 +46,10 @@ dependencies {
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.google.dagger:dagger-android:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
-    //annotationProcessor "com.google.dagger:dagger-compiler:$dagger_verison"
-    //annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    //implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
 
     testImplementation "androidx.room:room-testing:$room_version"
     testImplementation 'junit:junit:4.12'

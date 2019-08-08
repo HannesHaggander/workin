@@ -1,5 +1,8 @@
 package com.towerowl.workin.data
 
+import android.util.Log
+import com.towerowl.workin.events.WorkSessionEvent
+import com.towerowl.workin.utils.TAG
 import io.reactivex.Flowable
 import io.reactivex.processors.PublishProcessor
 import kotlinx.coroutines.Dispatchers.IO
@@ -7,20 +10,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
+import javax.inject.Inject
 
 class WorkSessionRepository
-    private constructor(private val workSessionDao: WorkSessionDao)
+@Inject constructor(private val workSessionDao: WorkSessionDao)
 {
-    companion object{
-        @Volatile private var instance : WorkSessionRepository? = null
-
-        fun getInstance(workSessionDao: WorkSessionDao) : WorkSessionRepository{
-            return instance ?: synchronized(this){
-                instance ?: WorkSessionRepository(workSessionDao).also { instance = it }
-            }
-        }
-    }
-
     private val streamPublished : PublishProcessor<WorkSessionEvent> = PublishProcessor.create()
     val messageFlow = streamPublished as Flowable<WorkSessionEvent>
     private var openSession : WorkSession? = null
