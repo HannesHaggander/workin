@@ -2,45 +2,131 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/f_overview_buttons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.2">
-
-        <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/f_overview_sign_in"
-                android:layout_width="@dimen/button_min_width"
-                android:layout_height="@dimen/button_min_height"
-                android:text="@string/start"
-                android:layout_marginEnd="10dp"
-                style="@style/Widget.AppCompat.Button.Colored"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/f_overview_sign_out"
-                android:layout_width="@dimen/button_min_width"
-                android:layout_height="@dimen/button_min_height"
-                android:text="@string/stop"
-                style="@style/Widget.AppCompat.Button.Colored"/>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/f_overview_activity_recycler"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/f_overview_header"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="10dp"
-            app:layout_constraintTop_toBottomOf="@id/f_overview_buttons"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:background="@color/colorPrimary"
+            android:elevation="5dp"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintTop_toTopOf="parent">
 
+        <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/f_overview_header_animation"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@color/colorPrimary"
+                android:layout_margin="20dp"
+                app:lottie_fileName="lottie-animations/work-programming.json"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!-- intentionally set to square format -->
+        <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/button_min_height"
+                android:minWidth="@dimen/button_min_height"
+                android:src="@drawable/settings"
+                android:tint="@color/background"
+                android:tintMode="src_in"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/background"
+            app:layout_constraintTop_toBottomOf="@id/f_overview_header"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/f_overview_time_sum_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Test"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="@dimen/big_text"
+                    android:textAlignment="viewEnd"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textSize="@dimen/big_text"
+                    android:text="XX:XX"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/f_overview_button_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/f_overview_sign_out"
+                    android:layout_width="@dimen/button_min_width"
+                    android:layout_height="@dimen/button_min_height"
+                    android:text="@string/stop"
+                    style="@style/Widget.AppCompat.Button.Colored"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/f_overview_sign_in"
+                    android:layout_width="@dimen/button_min_width"
+                    android:layout_height="@dimen/button_min_height"
+                    android:text="@string/start"
+                    android:layout_marginEnd="10dp"
+                    style="@style/Widget.AppCompat.Button.Colored"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/f_overview_time_sum_text"
+                app:layout_constraintBottom_toTopOf="@id/f_overview_button_container">
+
+            <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="20dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0">
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/f_overview_activity_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

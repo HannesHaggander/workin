@@ -2,4 +2,5 @@
 <resources>
     <dimen name="button_min_height">60dp</dimen>
     <dimen name="button_min_width">120dp</dimen>
+    <dimen name="big_text">30sp</dimen>
 </resources>
