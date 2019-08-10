@@ -139,16 +139,12 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/data/WorkSessionRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/data/WorkSessionRepository.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/fragments/FragmentOverview.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/fragments/FragmentOverview.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_overview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_overview.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -188,27 +184,53 @@
         <leaf>
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_overview.xml">
-              <provider editor-type-id="android-designer2" />
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-                  <folding>
-                    <element signature="e#3182#3199#0" expanded="true" />
-                    <element signature="e#3515#3532#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="315">
+                  <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
                 </state>
               </provider>
+              <provider editor-type-id="android-designer2" />
             </entry>
           </file>
         </leaf>
       </split-first>
       <split-second>
         <leaf>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="165">
+                  <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="75">
-                  <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+                  <caret line="5" column="12" lean-forward="true" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/fragments/FragmentOverview.kt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="756">
+                  <caret line="100" column="99" selection-start-line="100" selection-start-column="99" selection-end-line="100" selection-end-column="99" />
+                  <folding>
+                    <element signature="e#3029#3043#1" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/data/WorkSessionRepository.kt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="330">
+                  <caret line="32" column="28" lean-forward="true" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
                 </state>
               </provider>
             </entry>
@@ -221,6 +243,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin File" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -254,14 +277,15 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/events/WorkSessionEvent.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/App.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/utils/constants.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/data/WorkSessionRepository.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/adapters/SessionAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/fragments/FragmentOverview.kt" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/data/WorkSessionRepository.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/primary_gradient.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_overview.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/fragments/FragmentOverview.kt" />
       </list>
     </option>
   </component>
@@ -278,10 +302,37 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane" />
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="workin" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="workin" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="workin" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="drawable" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="workin" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -414,7 +465,7 @@
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.3294979" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.3294979" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.36820084" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.33263597" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.35460252" />
       <window_info anchor="right" id="Preview" order="0" />
@@ -423,7 +474,7 @@
       <window_info anchor="right" id="Gradle" order="3" weight="0.32975337" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
-      <window_info anchor="right" content_ui="combo" id="Project" order="6" weight="0.12967382" />
+      <window_info active="true" anchor="right" content_ui="combo" id="Project" order="6" visible="true" weight="0.14558473" />
       <window_info anchor="right" id="Resources Explorer" order="7" weight="0.20811594" />
     </layout>
     <layout-to-restore>
@@ -441,7 +492,7 @@
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.3294979" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.3294979" />
-      <window_info active="true" anchor="bottom" id="Build" order="7" visible="true" weight="0.36820084" />
+      <window_info active="true" anchor="bottom" id="Build" order="7" visible="true" weight="0.33263597" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.35460252" />
       <window_info anchor="right" id="Preview" order="0" />
@@ -450,7 +501,7 @@
       <window_info anchor="right" id="Gradle" order="3" weight="0.32975337" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
-      <window_info anchor="right" content_ui="combo" id="Project" order="6" visible="true" weight="0.12967382" />
+      <window_info anchor="right" content_ui="combo" id="Project" order="6" visible="true" weight="0.14558473" />
       <window_info anchor="right" id="Resources Explorer" order="7" weight="0.20811594" />
     </layout-to-restore>
   </component>
@@ -468,20 +519,8 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/modules/AppRoomModule.kt" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/modules/ContextModule.kt" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/components/AppRoomComponent.kt" />
-    <entry file="file://$PROJECT_DIR$/app/build/tmp/kapt3/stubs/debug/com/towerowl/workin/data/components/AppComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/kapt/debug/com/towerowl/workin/data/components/DaggerAppComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/tmp/kapt3/stubs/debug/com/towerowl/workin/data/components/AppComponent.java" />
+    <entry file="file://$PROJECT_DIR$/app/build/generated/source/kapt/debug/com/towerowl/workin/data/components/DaggerAppComponent.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -501,36 +540,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/data/modules/DaoModule.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#42#230#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/test.kt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/data/WorkSessionImpl.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="32" lean-forward="true" selection-start-column="32" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/dagger/modules/DaoModule.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-          <folding>
-            <element signature="e#44#164#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/data/modules/DaoModule.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/test.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/data/WorkSessionImpl.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/dagger/modules/DaoModule.kt" />
     <entry file="file://$PROJECT_DIR$/app/build/tmp/kapt3/stubs/debug/com/towerowl/workin/dagger/components/AppComponent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -559,13 +572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/App.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/dagger/modules/RoomModule.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -577,13 +583,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/data/WorkSessionRepository.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -656,42 +655,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/fragments/FragmentOverview.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="32" column="54" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/App.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <caret line="15" column="47" lean-forward="true" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="45" lean-forward="true" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_overview.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/primary_gradient.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+          <caret line="5" column="12" lean-forward="true" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_overview.xml">
-      <provider editor-type-id="android-designer2" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+        <state relative-caret-position="165">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/data/WorkSessionRepository.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="32" column="28" lean-forward="true" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/towerowl/workin/fragments/FragmentOverview.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="100" column="99" selection-start-line="100" selection-start-column="99" selection-end-line="100" selection-end-column="99" />
           <folding>
-            <element signature="e#3182#3199#0" expanded="true" />
-            <element signature="e#3515#3532#0" expanded="true" />
+            <element signature="e#3029#3043#1" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,5 +1,6 @@
 package com.towerowl.workin.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,8 +24,9 @@ import java.util.*
 
 class FragmentOverview : Fragment() {
 
-    private lateinit var startButton: Lazy<AppCompatButton>
-    private lateinit var stopButton: Lazy<AppCompatButton>
+//    private lateinit var startButton: Lazy<AppCompatButton>
+//    private lateinit var stopButton: Lazy<AppCompatButton>
+    private lateinit var toggleButton: Lazy<AppCompatButton>
     private lateinit var sessionList: Lazy<RecyclerView>
 
     private val mAdapter: SessionAdapter = SessionAdapter()
@@ -42,8 +44,9 @@ class FragmentOverview : Fragment() {
     }
 
     private fun setupViews() {
-        startButton = lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_sign_in) ?: throw Exception() }
-        stopButton = lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_sign_out) ?: throw Exception() }
+//        startButton = lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_sign_in) ?: throw Exception() }
+//        stopButton = lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_sign_out) ?: throw Exception() }
+        toggleButton = lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_toggle_session) ?: throw Exception() }
         sessionList = lazy { view?.findViewById<RecyclerView>(R.id.f_overview_activity_recycler) ?: throw Exception() }
     }
 
@@ -52,15 +55,29 @@ class FragmentOverview : Fragment() {
             .workSessionRepo
 
     private fun setupButtons() {
-        startButton.value.setOnClickListener {
-            val session = WorkSession(UUID.randomUUID(), "Injected ${Random().nextInt(1000)}")
+//        startButton.value.setOnClickListener {
+//            val session = WorkSession(UUID.randomUUID(), "Injected ${Random().nextInt(1000)}")
+//
+//            getWorkSessionRepo().insertWorkSession(session)
+//                .also { getWorkSessionRepo().setOpenWorkSession(session) }
+//        }
+//
+//        stopButton.value.setOnClickListener {
+//            getWorkSessionRepo().closeOpenWorkSession()
+//        }
 
-            getWorkSessionRepo().insertWorkSession(session)
-                .also { getWorkSessionRepo().setOpenWorkSession(session) }
-        }
-
-        stopButton.value.setOnClickListener {
-            getWorkSessionRepo().closeOpenWorkSession()
+        toggleButton.value.setOnClickListener {
+            val workSessionRepo = getWorkSessionRepo()
+            if(workSessionRepo.isSessionOpen()){
+                workSessionRepo.closeOpenWorkSession()
+                toggleButton.value.setText(R.string.start)
+            }
+            else {
+                val session = WorkSession()
+                workSessionRepo.insertWorkSession(session)
+                    .also { workSessionRepo.setOpenWorkSession(session) }
+                toggleButton.value.setText(R.string.stop)
+            }
         }
     }
 
@@ -81,7 +98,7 @@ class FragmentOverview : Fragment() {
     }
 
     private fun setupRecycler() {
-        sessionList.value.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        sessionList.value.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, true)
         sessionList.value.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         sessionList.value.adapter = mAdapter
     }

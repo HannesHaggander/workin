@@ -69,4 +69,6 @@ class WorkSessionRepository
     fun getWorkSession(id : String) {
         workSessionDao.getWorkSession(id)
     }
+
+    fun isSessionOpen() : Boolean = openSession != null
 }
