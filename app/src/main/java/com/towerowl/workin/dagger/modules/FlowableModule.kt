@@ -10,6 +10,5 @@ import javax.inject.Singleton
 @Module
 class FlowableModule {
    @Provides @Singleton
-   fun workSessionStream() : Flowable<WorkSessionEvent>
-           = PublishProcessor.create()
+   fun workSessionStream() : Flowable<WorkSessionEvent> = PublishProcessor.create()
 }

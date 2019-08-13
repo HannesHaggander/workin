@@ -1,5 +1,6 @@
 package com.towerowl.workin.data
 
+import android.app.Activity
 import android.util.Log
 import com.towerowl.workin.App
 import com.towerowl.workin.events.WorkSessionEvent
@@ -14,7 +15,7 @@ import java.util.*
 import javax.inject.Inject
 
 class WorkSessionRepository
-@Inject constructor(private val workSessionDao: WorkSessionDao)
+@Inject constructor(@Inject var workSessionDao : WorkSessionDao, val activity : Activity)
 {
     private var openSession : WorkSession? = null
 
@@ -25,7 +26,7 @@ class WorkSessionRepository
             }
         }
 
-        streamPublished.onNext(WorkSessionEvent.Inserted(workSession))
+        //streamPublished.onNext(WorkSessionEvent.Inserted(workSession))
     }
 
     fun removeWorkSession(workSession : WorkSession) {
@@ -35,7 +36,7 @@ class WorkSessionRepository
             }
         }
 
-        streamPublished.onNext(WorkSessionEvent.Removed(workSession))
+        //streamPublished.onNext(WorkSessionEvent.Removed(workSession))
     }
 
     fun updateWorkSession(workSession: WorkSession){
@@ -45,7 +46,7 @@ class WorkSessionRepository
             }
         }
 
-        streamPublished.onNext(WorkSessionEvent.Updated(workSession))
+        //streamPublished.onNext(WorkSessionEvent.Updated(workSession))
     }
 
     fun setOpenWorkSession(workSession : WorkSession){
