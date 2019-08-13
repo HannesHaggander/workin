@@ -9,24 +9,14 @@ import com.towerowl.workin.data.WorkSessionRepository
 
 class App : Application() {
 
-    lateinit var contextModule : ContextModule
-        private set
     lateinit var appComponent : AppComponent
         private set
-    lateinit var workSessionRepo : WorkSessionRepository
-        private set
-
+    
     override fun onCreate() {
         super.onCreate()
-
-        contextModule = ContextModule(this)
-
         appComponent = DaggerAppComponent.builder()
-            .contextModule(contextModule)
+            .contextModule(ContextModule(this))
             .build()
-
-        workSessionRepo = WorkSessionRepository(appComponent.database()
-            .workSessionDao())
     }
 
     companion object {

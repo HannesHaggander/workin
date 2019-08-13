@@ -15,6 +15,7 @@ import com.towerowl.workin.App
 import com.towerowl.workin.R
 import com.towerowl.workin.adapters.SessionAdapter
 import com.towerowl.workin.data.WorkSession
+import com.towerowl.workin.data.WorkSessionDao
 import com.towerowl.workin.data.WorkSessionRepository
 import com.towerowl.workin.events.WorkSessionEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,10 +25,9 @@ import java.util.*
 
 class FragmentOverview : Fragment() {
 
-//    private lateinit var startButton: Lazy<AppCompatButton>
-//    private lateinit var stopButton: Lazy<AppCompatButton>
     private lateinit var toggleButton: Lazy<AppCompatButton>
     private lateinit var sessionList: Lazy<RecyclerView>
+    private lateinit var workSessionRepo : Lazy<WorkSessionRepository>
 
     private val mAdapter: SessionAdapter = SessionAdapter()
 
@@ -44,38 +44,26 @@ class FragmentOverview : Fragment() {
     }
 
     private fun setupViews() {
-//        startButton = lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_sign_in) ?: throw Exception() }
-//        stopButton = lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_sign_out) ?: throw Exception() }
         toggleButton = lazy { view?.findViewById<AppCompatButton>(R.id.f_overview_toggle_session) ?: throw Exception() }
         sessionList = lazy { view?.findViewById<RecyclerView>(R.id.f_overview_activity_recycler) ?: throw Exception() }
+        workSessionRepo = lazy {
+            WorkSessionRepository(App.get(requireActivity())
+            .appComponent
+            .database()
+            .workSessionDao())
+        }
     }
 
-    private fun getWorkSessionRepo(): WorkSessionRepository =
-        App.get(requireActivity())
-            .workSessionRepo
-
     private fun setupButtons() {
-//        startButton.value.setOnClickListener {
-//            val session = WorkSession(UUID.randomUUID(), "Injected ${Random().nextInt(1000)}")
-//
-//            getWorkSessionRepo().insertWorkSession(session)
-//                .also { getWorkSessionRepo().setOpenWorkSession(session) }
-//        }
-//
-//        stopButton.value.setOnClickListener {
-//            getWorkSessionRepo().closeOpenWorkSession()
-//        }
-
         toggleButton.value.setOnClickListener {
-            val workSessionRepo = getWorkSessionRepo()
-            if(workSessionRepo.isSessionOpen()){
-                workSessionRepo.closeOpenWorkSession()
+            if(workSessionRepo.value.isSessionOpen()){
+                workSessionRepo.value.closeOpenWorkSession()
                 toggleButton.value.setText(R.string.start)
             }
             else {
                 val session = WorkSession()
-                workSessionRepo.insertWorkSession(session)
-                    .also { workSessionRepo.setOpenWorkSession(session) }
+                workSessionRepo.value.insertWorkSession(session)
+                    .also { workSessionRepo.value.setOpenWorkSession(session) }
                 toggleButton.value.setText(R.string.stop)
             }
         }
@@ -83,8 +71,8 @@ class FragmentOverview : Fragment() {
 
     private fun setupStreams(){
         App.get(requireActivity())
-            .workSessionRepo
-            .messageFlow
+            .appComponent
+            .workSessionStream()
             .doOnNext {
                 when (it) {
                     is WorkSessionEvent.Inserted -> { mAdapter.add(it.data) }

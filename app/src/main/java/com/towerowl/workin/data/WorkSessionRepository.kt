@@ -1,6 +1,7 @@
 package com.towerowl.workin.data
 
 import android.util.Log
+import com.towerowl.workin.App
 import com.towerowl.workin.events.WorkSessionEvent
 import com.towerowl.workin.utils.TAG
 import io.reactivex.Flowable
@@ -15,8 +16,6 @@ import javax.inject.Inject
 class WorkSessionRepository
 @Inject constructor(private val workSessionDao: WorkSessionDao)
 {
-    private val streamPublished : PublishProcessor<WorkSessionEvent> = PublishProcessor.create()
-    val messageFlow = streamPublished as Flowable<WorkSessionEvent>
     private var openSession : WorkSession? = null
 
     fun insertWorkSession(workSession : WorkSession) {

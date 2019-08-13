@@ -2,7 +2,9 @@ package com.towerowl.workin.dagger.modules
 
 import android.content.Context
 import androidx.room.Room
+import com.towerowl.workin.App
 import com.towerowl.workin.data.AppRoom
+import com.towerowl.workin.data.WorkSessionRepository
 import com.towerowl.workin.utils.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
