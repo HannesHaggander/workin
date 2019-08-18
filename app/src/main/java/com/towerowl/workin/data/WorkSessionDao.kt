@@ -4,10 +4,10 @@ import androidx.room.*
 
 @Dao
 interface WorkSessionDao {
-    @Query("SELECT * FROM `work-sessions`")
+    @Query("SELECT * FROM work_sessions")
     fun getWorkSessions() : List<WorkSession>
 
-    @Query("SELECT * FROM `work-sessions` WHERE _id = :id")
+    @Query("SELECT * FROM work_sessions WHERE _id = :id")
     fun getWorkSession(id : String) : WorkSession
 
     @Insert

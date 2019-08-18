@@ -6,13 +6,22 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.OffsetDateTime
 import javax.inject.Inject
 
 class WorkSessionRepository
-@Inject constructor(val workSessionDao : WorkSessionDao, val publishStream : FlowableProcessor<WorkSessionEvent>)
+@Inject constructor(private val workSessionDao : WorkSessionDao, val publishStream : FlowableProcessor<WorkSessionEvent>)
 {
     private var openSession : WorkSession? = null
+
+    init {
+        GlobalScope.launch {
+            openSession = workSessionDao.getWorkSessions()
+                .firstOrNull { it.closedAt == null }
+        }
+    }
 
     fun insertWorkSession(workSession : WorkSession) {
         GlobalScope.launch {
@@ -44,6 +53,10 @@ class WorkSessionRepository
         publishStream.onNext(WorkSessionEvent.Updated(workSession))
     }
 
+    fun getWorkSessionsFromToday() : List<WorkSession> =
+        workSessionDao.getWorkSessions()
+            .filter { it.isDay(LocalDate.now()) }
+
     fun setOpenWorkSession(workSession : WorkSession){
         closeOpenWorkSession()
         openSession = workSession
@@ -51,7 +64,7 @@ class WorkSessionRepository
 
     fun closeOpenWorkSession(){
         openSession?.let {
-            it.closedAt = Calendar.getInstance()
+            it.closedAt = OffsetDateTime.now()
             updateWorkSession(it)
             openSession = null
         }

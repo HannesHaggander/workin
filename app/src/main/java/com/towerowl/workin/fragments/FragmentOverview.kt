@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,11 +19,16 @@ import com.towerowl.workin.events.WorkSessionEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 
 class FragmentOverview : Fragment() {
 
     private lateinit var toggleButton: AppCompatButton
     private lateinit var sessionList: RecyclerView
+    private lateinit var timeSumText : AppCompatTextView
 
     private val mAdapter: SessionAdapter = SessionAdapter()
 
@@ -35,12 +42,14 @@ class FragmentOverview : Fragment() {
         setupButtons()
         setupRecycler()
         setupStreams()
+        setupWorkSessionsFromToday()
     }
 
 
     private fun setupViews() {
         toggleButton = view?.findViewById<AppCompatButton>(R.id.f_overview_toggle_session) ?: throw Exception()
         sessionList = view?.findViewById<RecyclerView>(R.id.f_overview_activity_recycler) ?: throw Exception()
+        timeSumText = view?.findViewById<AppCompatTextView>(R.id.f_overview_time_display) ?: throw Exception()
     }
 
 
@@ -65,6 +74,27 @@ class FragmentOverview : Fragment() {
     }
 
 
+    private fun setupWorkSessionsFromToday(){
+        GlobalScope.launch {
+            val items = App.get(requireActivity())
+                .appComponent
+                .workSessionRepository()
+                .getWorkSessionsFromToday()
+
+            items.forEach { mAdapter.add(it) }
+            items.sumBy {
+                ChronoUnit.SECONDS.between(it.createdAt, it.closedAt ?: LocalDateTime.now()).toInt()
+            }
+            .also { seconds ->
+                val minutes = seconds / 60
+                val hours = minutes / 24
+                timeSumText.setText("$hours ${requireContext().getString(R.string.hours).toLowerCase()}, " +
+                        "${minutes%60} ${requireContext().getString(R.string.minutes).toLowerCase()}", TextView.BufferType.NORMAL)
+            }
+        }
+    }
+
+
     private fun setupStreams() =
         App.get(requireActivity())
             .appComponent
@@ -73,8 +103,14 @@ class FragmentOverview : Fragment() {
             .doOnNext {
                 when(it){
                     is WorkSessionEvent.Inserted -> { mAdapter.add(it.data) }
+
                     is WorkSessionEvent.Removed  -> { mAdapter.remove(it.data) }
-                    is WorkSessionEvent.Updated  -> { mAdapter.update(it.data) }
+
+                    is WorkSessionEvent.Updated  -> {
+                        setupWorkSessionsFromToday()
+                        mAdapter.update(it.data)
+                    }
+
                     else -> throw Exception("Unhandled work session event")
                 }
             }

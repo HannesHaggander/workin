@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.towerowl.workin.R
 import com.towerowl.workin.data.WorkSession
 import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class SessionAdapter : RecyclerView.Adapter<SessionViewHolder>() {
@@ -65,16 +66,15 @@ class SessionAdapter : RecyclerView.Adapter<SessionViewHolder>() {
         holder.setData(data[position])
         vhMap[data[position]] = holder
     }
-
 }
 
 class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun setData(data: WorkSession) {
-        val dformat = SimpleDateFormat("hh:mm", Locale.getDefault())
+        val dformat = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
 
         itemView.findViewById<AppCompatTextView>(R.id.vh_session_start).text =
-            "Start: ${dformat.format(data.createdAt.time)}"
+            "Start: ${data.createdAt.format(dformat)}"
         itemView.findViewById<AppCompatTextView>(R.id.vh_session_end).text =
-            "End: ${data.closedAt?.let { dformat.format(it.time) } ?: ""}"
+            "End: ${data.closedAt?.let { it.format(dformat) } ?: ""}"
     }
 }
