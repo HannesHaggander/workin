@@ -1,12 +1,7 @@
 package com.towerowl.workin.data
 
-import android.app.Activity
-import android.util.Log
-import com.towerowl.workin.App
 import com.towerowl.workin.events.WorkSessionEvent
-import com.towerowl.workin.utils.TAG
-import io.reactivex.Flowable
-import io.reactivex.processors.PublishProcessor
+import io.reactivex.processors.FlowableProcessor
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -15,7 +10,7 @@ import java.util.*
 import javax.inject.Inject
 
 class WorkSessionRepository
-@Inject constructor(@Inject var workSessionDao : WorkSessionDao, val activity : Activity)
+@Inject constructor(val workSessionDao : WorkSessionDao, val publishStream : FlowableProcessor<WorkSessionEvent>)
 {
     private var openSession : WorkSession? = null
 
@@ -26,7 +21,7 @@ class WorkSessionRepository
             }
         }
 
-        //streamPublished.onNext(WorkSessionEvent.Inserted(workSession))
+        publishStream.onNext(WorkSessionEvent.Inserted(workSession))
     }
 
     fun removeWorkSession(workSession : WorkSession) {
@@ -36,7 +31,7 @@ class WorkSessionRepository
             }
         }
 
-        //streamPublished.onNext(WorkSessionEvent.Removed(workSession))
+        publishStream.onNext(WorkSessionEvent.Removed(workSession))
     }
 
     fun updateWorkSession(workSession: WorkSession){
@@ -46,7 +41,7 @@ class WorkSessionRepository
             }
         }
 
-        //streamPublished.onNext(WorkSessionEvent.Updated(workSession))
+        publishStream.onNext(WorkSessionEvent.Updated(workSession))
     }
 
     fun setOpenWorkSession(workSession : WorkSession){

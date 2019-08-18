@@ -16,5 +16,5 @@ import javax.inject.Singleton
 @Component(modules = [RoomModule::class, ContextModule::class, FlowableModule::class])
 interface AppComponent {
     fun database() : AppRoom
-    fun workSessionPublishFlow() : Flowable<WorkSessionEvent>
+    fun workSessionRepository() : WorkSessionRepository
 }

@@ -13,6 +13,6 @@ data class WorkSession(
     var closedAt : Calendar? = null
 ){
     override fun toString(): String {
-        return "$id:$description"
+        return "$id:${hashCode()}:$description"
     }
 }
