@@ -22,6 +22,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
 import java.time.temporal.ChronoUnit
 
 class FragmentOverview : Fragment() {
@@ -83,13 +84,15 @@ class FragmentOverview : Fragment() {
 
             items.forEach { mAdapter.add(it) }
             items.sumBy {
-                ChronoUnit.SECONDS.between(it.createdAt, it.closedAt ?: LocalDateTime.now()).toInt()
+                ChronoUnit.SECONDS.between(it.createdAt, it.closedAt ?: OffsetDateTime.now()).toInt()
             }
             .also { seconds ->
                 val minutes = seconds / 60
                 val hours = minutes / 24
-                timeSumText.setText("$hours ${requireContext().getString(R.string.hours).toLowerCase()}, " +
-                        "${minutes%60} ${requireContext().getString(R.string.minutes).toLowerCase()}", TextView.BufferType.NORMAL)
+                requireActivity().runOnUiThread {
+                    timeSumText.setText("$hours ${requireContext().getString(R.string.hours).toLowerCase()}, " +
+                            "${minutes%60} ${requireContext().getString(R.string.minutes).toLowerCase()}", TextView.BufferType.NORMAL)
+                }
             }
         }
     }
@@ -107,7 +110,7 @@ class FragmentOverview : Fragment() {
                     is WorkSessionEvent.Removed  -> { mAdapter.remove(it.data) }
 
                     is WorkSessionEvent.Updated  -> {
-                        setupWorkSessionsFromToday()
+                        requireActivity().runOnUiThread { setupWorkSessionsFromToday() }
                         mAdapter.update(it.data)
                     }
 

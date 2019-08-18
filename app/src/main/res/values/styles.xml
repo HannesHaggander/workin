@@ -10,7 +10,7 @@
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <item name="isLightTheme">true</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:background">@color/background</item>
+        <item name="android:background">@color/white</item>
     </style>
 
 </resources>

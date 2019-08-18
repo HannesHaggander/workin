@@ -1,5 +1,6 @@
 package com.towerowl.workin.dagger.modules
 
+import com.towerowl.workin.events.NetworkObserverEvent
 import com.towerowl.workin.events.WorkSessionEvent
 import dagger.Module
 import dagger.Provides
@@ -15,4 +16,10 @@ class FlowableModule {
 
    @Provides @Singleton
    fun workSessionPublisher() : FlowableProcessor<WorkSessionEvent> = PublishProcessor.create()
+
+   @Provides @Singleton
+   fun networkObserverPublisher() : FlowableProcessor<NetworkObserverEvent> = PublishProcessor.create()
+
+   @Provides @Singleton
+   fun networkObserverStream() : Flowable<NetworkObserverEvent> = networkObserverPublisher()
 }
