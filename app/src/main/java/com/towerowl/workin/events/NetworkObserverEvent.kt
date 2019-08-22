@@ -1,6 +1,6 @@
 package com.towerowl.workin.events
 
 sealed class NetworkObserverEvent {
-    class WorkNetworkAvailable : NetworkObserverEvent()
-    class WorkNetworkLost : NetworkObserverEvent()
+    object WorkNetworkAvailable : NetworkObserverEvent()
+    object WorkNetworkLost : NetworkObserverEvent()
 }

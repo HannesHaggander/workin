@@ -5,9 +5,8 @@ import android.net.Network
 import com.towerowl.workin.dagger.components.AppComponent
 import com.towerowl.workin.services.NetworkObserverService
 
-class NetworkObserverCallback constructor(val networkObserverService: NetworkObserverService):
+class NetworkObserverCallback constructor(private val networkObserverService: NetworkObserverService):
     ConnectivityManager.NetworkCallback() {
-
 
     override fun onAvailable(network: Network) {
         networkObserverService.isConnectedNetworkWifi(network)

@@ -4,4 +4,8 @@
     <dimen name="button_min_width">120dp</dimen>
     <dimen name="big_text">30sp</dimen>
     <dimen name="normal_text_size">16sp</dimen>
+    <dimen name="settings_card_view_padding">10dp</dimen>
+    <dimen name="setting_auto_wifi_padding">10dp</dimen>
+    <dimen name="title_text_size">40sp</dimen>
+    <dimen name="card_round_corner">10dp</dimen>
 </resources>

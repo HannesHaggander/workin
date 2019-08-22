@@ -7,4 +7,6 @@
     <string name="hours">Hours</string>
     <string name="minutes">Minutes</string>
     <string name="placeholder">placeholder</string>
+    <string name="setting_auto_wifi_log">Automatic wifi log detection</string>
+    <string name="settings">Settings</string>
 </resources>

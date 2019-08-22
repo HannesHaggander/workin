@@ -6,22 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.towerowl.workin.App
 import com.towerowl.workin.R
+import com.towerowl.workin.activities.ActivityMain
 import com.towerowl.workin.adapters.SessionAdapter
 import com.towerowl.workin.data.WorkSession
 import com.towerowl.workin.events.WorkSessionEvent
+import com.towerowl.workin.viewmodels.OverviewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.temporal.ChronoUnit
 
@@ -33,24 +37,62 @@ class FragmentOverview : Fragment() {
 
     private val mAdapter: SessionAdapter = SessionAdapter()
 
+    private lateinit var overviewModel : OverviewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.fragment_overview, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupViewModel()
         setupViews()
         setupButtons()
         setupRecycler()
         setupStreams()
-        setupWorkSessionsFromToday()
+    }
+
+
+    private fun setupViewModel(){
+        overviewModel = ViewModelProvider(this).get(OverviewModel::class.java)
+            .apply { activity = requireActivity() }
+            .also {
+                it.workSessionsToday.observe(this, Observer {
+                        data -> workSessionTodayObserver(data)
+                })
+
+                it.getWorkSessionsFromToday()
+            }
+    }
+
+
+    private fun workSessionTodayObserver(sessions : List<WorkSession>){
+        sessions.forEach { x -> mAdapter.add(x) }
+        sessions.sumBy { session ->
+            ChronoUnit.SECONDS.between(session.createdAt,
+                session.closedAt ?: OffsetDateTime.now()).toInt()
+            }
+            .also { seconds ->
+                val minutes = seconds / 60
+                val hours = minutes / 24
+
+                timeSumText.text =
+                    "$hours ${requireContext().getString(R.string.hours).toLowerCase()}, " +
+                    "${minutes%60} ${requireContext().getString(R.string.minutes).toLowerCase()}"
+            }
     }
 
 
     private fun setupViews() {
-        toggleButton = view?.findViewById<AppCompatButton>(R.id.f_overview_toggle_session) ?: throw Exception()
-        sessionList = view?.findViewById<RecyclerView>(R.id.f_overview_activity_recycler) ?: throw Exception()
-        timeSumText = view?.findViewById<AppCompatTextView>(R.id.f_overview_time_display) ?: throw Exception()
+        toggleButton = requireView().findViewById(R.id.f_overview_toggle_session)
+        sessionList = requireView().findViewById(R.id.f_overview_activity_recycler)
+        timeSumText = requireView().findViewById(R.id.f_overview_time_display)
+        requireView().findViewById<AppCompatImageButton>(R.id.fragment_overview_settings)
+            .also {
+                it.setOnClickListener {
+                    (activity as ActivityMain).swapFragment(FragmentSettings())
+                }
+            }
     }
 
 
@@ -74,30 +116,6 @@ class FragmentOverview : Fragment() {
             }
     }
 
-
-    private fun setupWorkSessionsFromToday(){
-        GlobalScope.launch {
-            val items = App.get(requireActivity())
-                .appComponent
-                .workSessionRepository()
-                .getWorkSessionsFromToday()
-
-            items.forEach { mAdapter.add(it) }
-            items.sumBy {
-                ChronoUnit.SECONDS.between(it.createdAt, it.closedAt ?: OffsetDateTime.now()).toInt()
-            }
-            .also { seconds ->
-                val minutes = seconds / 60
-                val hours = minutes / 24
-                requireActivity().runOnUiThread {
-                    timeSumText.setText("$hours ${requireContext().getString(R.string.hours).toLowerCase()}, " +
-                            "${minutes%60} ${requireContext().getString(R.string.minutes).toLowerCase()}", TextView.BufferType.NORMAL)
-                }
-            }
-        }
-    }
-
-
     private fun setupStreams() =
         App.get(requireActivity())
             .appComponent
@@ -110,7 +128,7 @@ class FragmentOverview : Fragment() {
                     is WorkSessionEvent.Removed  -> { mAdapter.remove(it.data) }
 
                     is WorkSessionEvent.Updated  -> {
-                        requireActivity().runOnUiThread { setupWorkSessionsFromToday() }
+                        overviewModel.getWorkSessionsFromToday()
                         mAdapter.update(it.data)
                     }
 

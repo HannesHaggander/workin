@@ -32,6 +32,7 @@
 
         <!-- intentionally set to square format -->
         <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/fragment_overview_settings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/button_min_height"
@@ -86,11 +87,11 @@
     <!-- Time sessions -->
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
-            app:layout_constraintHeight_default="wrap"
+            app:layout_constrainedHeight="true"
             app:layout_constraintVertical_bias="0"
             app:layout_constraintTop_toBottomOf="@id/f_overview_time_sum_container"
             app:layout_constraintBottom_toTopOf="@id/f_overview_toggle_session">

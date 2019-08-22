@@ -3,26 +3,34 @@ package com.towerowl.workin.activities
 import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.towerowl.workin.R
 import com.towerowl.workin.fragments.FragmentOverview
 
 class ActivityMain : AppCompatActivity() {
 
-    private val mFragmentContainer : FrameLayout by lazy { findViewById<FrameLayout>(R.id.a_main_container) }
+    private val fragmentContainer : FrameLayout by lazy { findViewById<FrameLayout>(R.id.a_main_container) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initiateFragment()
+        swapFragment(FragmentOverview())
     }
 
-    private fun initiateFragment(){
+    fun swapFragment(fragment : Fragment){
         supportFragmentManager.beginTransaction()
-            .add(mFragmentContainer.id, FragmentOverview())
-            .commitNow()
+            .replace(fragmentContainer.id, fragment)
+            .addToBackStack(fragment::class.java.simpleName)
+            .commit()
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onBackPressed() {
+        if(supportFragmentManager.backStackEntryCount > 1){
+            supportFragmentManager.popBackStack()
+            return
+        }
+
+        super.onBackPressed()
     }
 }
