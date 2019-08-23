@@ -6,6 +6,7 @@ import com.towerowl.workin.dagger.modules.ContextModule
 import com.towerowl.workin.dagger.modules.FlowableModule
 import com.towerowl.workin.dagger.modules.RoomModule
 import com.towerowl.workin.data.AppRoom
+import com.towerowl.workin.data.SettingsRepository
 import com.towerowl.workin.data.WorkSessionRepository
 import com.towerowl.workin.events.NetworkObserverEvent
 import com.towerowl.workin.events.WorkSessionEvent
@@ -22,5 +23,6 @@ interface AppComponent {
     fun workSessionRepository() : WorkSessionRepository
     fun networkObserverPublisher() : FlowableProcessor<NetworkObserverEvent>
     fun networkObserverStream() : Flowable<NetworkObserverEvent>
+    fun settingsRepository() : SettingsRepository
 }
 

@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface SettingsDao {
     @Query("SELECT * FROM settings")
-    fun getSettings() : Settings
+    fun getSettings() : List<Settings>
 
     @Insert
     fun insertSettings(settings : Settings)

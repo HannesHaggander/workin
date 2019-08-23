@@ -1,5 +1,9 @@
 package com.towerowl.workin.data
 
-class SettingsRepository {
+import javax.inject.Inject
 
+class SettingsRepository
+@Inject constructor(private val settingsDao : SettingsDao){
+    fun isAutoWifiActive() : Boolean =
+        settingsDao.getSettings().first().wifiActive
 }
